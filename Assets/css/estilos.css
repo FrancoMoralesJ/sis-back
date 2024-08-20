@@ -1,0 +1,142 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: borde-box;
+}
+
+body {
+   font-family: Montserrat, sans-serif;
+
+}
+
+
+
+.columas {
+
+   padding-top: 35px;
+}
+
+.login-page {
+   /*
+          background-image: url('<php echo base_url; ?>/Assets/img/fondo.svg');
+           height: 100vh;
+           background-image: url('https://react-material-dashboard-laravel.creative-tim.com/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg');
+           background-repeat: no-repeat;
+           background-position-x: center;
+           background-position-y: center;
+           background-size: cover;
+   
+           filter: blur(1px);
+           filter: saturate(200%)*/
+   background: linear-gradient(to bottom left, #5a76a7 50%, rgb(255, 255, 255) 50%);
+   min-height: 100vh;
+}
+
+.sidebar-background {
+   /* background: linear-gradient(to right, rgb(16, 78, 44), rgb(55, 173, 118)); */
+
+   background: linear-gradient(to right, rgb(235, 151, 25), rgb(236, 163, 26));
+
+}
+
+.navbar-white {
+   background-color: #eb9f19 !important;
+   color: #1f2d3d;
+}
+
+.sidebar-fondo {
+   background: linear-gradient(to right, rgb(0 0 0), rgb(35 35 35));
+}
+
+.user-panel-modific {
+   border-bottom: 1px solid #a6abaf;
+}
+
+
+.nav-link:hover {
+   background-color: rgb(179 120 18);
+   color: rgb(255, 255, 255);
+}
+
+.nav-pills .nav-link:not(.active):hover {
+   color: #ffffff;
+}
+
+
+.bg-olive {
+   background-color: rgb(236, 163, 26) !important;
+}
+
+.text-olive {
+   color:  rgb(236, 163, 26) !important;
+}
+.text-olive:hover {
+   color: rgb(255 255 255) !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+   color: white !important;
+   border: 1px solid #111;
+   background-color: #585858;
+ 
+   background: linear-gradient(to bottom, #cdcdcd 0%, #fff9f9 100%) !important;
+}
+
+.page-item.active .page-link {
+   z-index: 3;
+   color: #000  !important;
+   background-color: #eae7e7  !important;
+   border-color: #ffffff !important;
+}
+
+.card-success.card-outline {
+   border-top: 3px solid #5a76a7 !important;
+}
+
+.modal-dialog {
+   /* max-width: 70%; */
+
+}
+
+.modal_dialog_custom {
+   max-width: 45%;
+
+}
+
+/* Brenda2015$# */
+.img_foto {
+   width: 150px !important;
+   object-fit: cover;
+}
+
+.select2-container .select2-selection--single {
+
+   height: 100% !important;
+
+
+}
+
+.input-group-custom {
+   flex-wrap: nowrap !important;
+
+}
+
+@media (max-width: 650px) {
+
+   /* Estilos que se aplicarán cuando el ancho de la pantalla sea menor que 576px */
+   .modal-dialog {
+      max-width: 100%;
+      margin: 0;
+   }
+
+   .form-control {
+
+      padding: 1.375rem .75rem !important;
+      font-size: 1.3rem !important;
+
+   }
+}
+
+.imprimir {
+   width: 100%;
+   height: 500px;
+}

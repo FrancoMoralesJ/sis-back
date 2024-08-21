@@ -134,6 +134,8 @@ class ProductosModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
+    
+
     public function filtrarProducto(String $campo, String $producto){
 
         $sql = "SELECT p.codigo ,p.foto,p.descripcion, m.nombre_marca,p.cantidad, p.estado FROM productos p 

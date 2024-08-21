@@ -287,7 +287,13 @@ class ComprasModel extends Query
         $data = $this->selectAll($sql);
         return $data;
     }
-
+    
+    public function getCategorias()
+    {
+        $sql = "select * from categorias";
+        $data = $this->selectAll($sql);
+        return $data;
+    }
 
     //  ===============================================
     public function getAnularVenta($id_ventas){
@@ -338,5 +344,15 @@ class ComprasModel extends Query
 
          return $data;
 
+    }
+
+    public function filtrarProducto(String $campo, String $producto){
+
+        $sql = "SELECT p.codigo ,p.foto,p.descripcion, m.nombre_marca,p.precio_venta,p.cantidad, p.estado FROM productos p INNER JOIN marcas m ON 
+        p.id_marca = m.id INNER JOIN categorias c ON c.id=p.id_categoria WHERE p.".$campo."=:".$campo;
+
+        $params = array(':'.$campo =>  $producto );
+        $data= $this->filtrar($sql, $params);
+        return $data;
     }
 }

@@ -26,7 +26,166 @@
     <section class="content mb-0">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-8">
+                    <div class="card card-outline card-olive">
+                        <div class="card-header bg-olive">
+                            <div class="col-sm-6">
+                                <h1 class="my-0 h6"><?= $data['page_titile']; ?> <small><i class="fab fa-shopify"></i></small></h1>
+                            </div>
+                        </div>
+
+                        <div class="card-body ">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="descripcion">Buscar por Codigo:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <small class="input-group-text">
+                                                    <i class="fa fa-file-alt"></i>
+                                                </small>
+                                            </div>
+                                            <input type="text" name="bCodigo" id="bCodigo" class="form-control" placeholder="Codigo.." disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="descripcion">Buscar por Nombre:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <small class="input-group-text">
+                                                    <i class="fa fa-file-alt"></i>
+                                                </small>
+                                            </div>
+                                            <input type="text" name="bNombre" id="bNombre" class="form-control" placeholder="Nombre.." disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="medida">Marca:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-code-branch"></i>
+                                                </span>
+                                            </div>
+                                            <select name="Bmarcas" id="Bmarcas" class="form-control" oninput="buscarProductos(event);">
+                                                <?php foreach ($data['marcas'] as $row) { ?>
+                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre_marca']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div><!-----col-md-4------>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="categoria">Categoría:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-th"></i></span>
+                                            </div>
+                                            <select name="bCategoria" id="bCategoria" class="form-control " oninput="buscarProductos(event);">
+                                                <?php foreach ($data['categorias'] as $row) { ?>
+                                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nombre']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div><!-----col-md-4------>
+                            </div><!---------FIN ROW---------->
+
+                            <div class="row">
+                            <div class="table-responsive">
+                                    <table class="table  table-striped border  table-hover text-nowrap  table-hover text-nowrap dt-responsive  "
+                                     id="tblBProductos" cellspacing="0" width="100%" height=" 200px">
+                                        <thead class="bg-olive">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Foto</th>
+                                                <th>Producto</th>
+                                                <th>Marca</th>
+                                                <th>Stock</th>
+                                                <th>precio-v</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblDetalleBuscarVentas">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-----FIN ROW------------>
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table  table-striped border  table-hover text-nowrap  table-hover text-nowrap dt-responsive  " id="tblDetalleVenta" cellspacing="0" width="100%">
+                                        <thead class="bg-olive">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Descipsión-p</th>
+                                                <th>Cantidad</th>
+                                                <th>Aplicar</th>
+                                                <th>Descuento</th>
+                                                <th>Precio</th>
+                                                <th>Sub-total</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblDetalleVentas">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="buscarCliente" class="font-weight-bolt">Buscar Cliente:</label>
+                                        <div class="input-group input-group-custom">
+                                            <div class="input-group-prepend">
+                                                <small class="input-group-text"><i class="fas fa-user"></i></small>
+                                            </div>
+                                            <select name="buscarCliente" id="buscarCliente" class="form-control border">
+                                                <?php foreach ($data['clientes'] as $row) { ?>
+                                                    <option value="<?php echo $row['id']; ?>"> <?php echo $row['nombre']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4 ml-auto">
+                                    <div class="form-group">
+                                        <label for="total" class="font-weight-bolt">Total:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <small class="input-group-text">
+                                                    <i class="fas fa-coins"></i>
+                                                </small>
+                                            </div>
+                                            <input type="text" id="totalV" class="form-control" placeholder="TOTAL.." disabled>
+                                            <button class="btn btn-block bg-olive mt-1" type="button" onclick="procesar(2);">Generar Venta <small><i class="fas fa-print"></i></small></button>
+                                        </div>
+                                    </div>
+                                </div><!--total-col-md-3--->
+                            </div><!--row--->
+
+                        </div><!----car-boy---->
+
+
+                    </div>
+                </div> <!-- /.col-->
+
+
+                <div class="col-md-4">
                     <div class="card card-outline card-olive">
                         <div class="card-header bg-olive">
                             <div class="col-sm-6">
@@ -39,9 +198,9 @@
 
                             <div class="row">
                                 <form id="frmVenta">
-                                    <div class="row p-1">
+                                    <div class="row ">
 
-                                        <div class="col-md-3 col-sm-12">
+                                        <div class="col-md-12 ">
                                             <div class="form-group">
                                                 <label for="codigo">Código de barras:</label>
                                                 <div class="input-group">
@@ -53,11 +212,11 @@
                                                     <input type="hidden" name="id" id="id">
                                                     <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Código.." onkeyup="buscarCodigoVenta(event);">
                                                 </div>
-
-
                                             </div>
                                         </div><!--1-col-md-3--->
-                                        <div class="col-md-3 col-sm-12">
+
+
+                                        <div class="col-md-12 ">
                                             <div class="form-group">
                                                 <label for="descripcion">Descripción:</label>
                                                 <div class="input-group">
@@ -70,7 +229,10 @@
                                                 </div>
                                             </div>
                                         </div><!--2-col-md-3--->
-                                        <div class="col-md-2 col-sm-12">
+
+
+
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="cantidad">Cantidad:</label>
                                                 <div class="input-group">
@@ -83,7 +245,7 @@
                                                 </div>
                                             </div>
                                         </div><!--3-col-md-3--->
-                                        <div class="col-md-2 col-sm-12">
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="precioV">Precio:</label>
                                                 <div class="input-group">
@@ -96,7 +258,7 @@
                                                 </div>
                                             </div>
                                         </div><!--4-col-md-3--->
-                                        <div class="col-md-2 col-sm-12">
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <label for="sub_total">Sub-Total:</label>
                                                 <div class="input-group">
@@ -129,71 +291,20 @@
 
     </section><!----Fin Section---------->
 
-    <section class="content mt-0">
-        <!-------tabla----------->
+    <!-- <section class="content mt-0">
+        
         <div class="container-fluid">
 
             <div class="card">
                 <div class="card-body p-2 ">
-                    <div class="table-responsive">
-                        <table class="table  table-striped border  table-hover text-nowrap  table-hover text-nowrap dt-responsive  " id="tblDetalleVenta" cellspacing="0" width="100%">
-                            <thead class="bg-olive">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Descipsión-p</th>
-                                    <th>Cantidad</th>
-                                    <th>Aplicar</th>
-                                    <th>Descuento</th>
-                                    <th>Precio</th>
-                                    <th>Sub-total</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tblDetalleVentas">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="buscarCliente" class="font-weight-bolt">Buscar Cliente:</label>
-                                <div class="input-group input-group-custom">
-                                    <div class="input-group-prepend">
-                                        <small class="input-group-text"><i class="fas fa-user"></i></small>
-                                    </div>
-                                    <select name="buscarCliente" id="buscarCliente" class="form-control border">
-                                        <?php foreach ($data['clientes'] as $row) { ?>
-                                            <option value="<?php echo $row['id']; ?>"> <?php echo $row['nombre']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
 
 
-                        <div class="col-md-4 ml-auto">
-                            <div class="form-group">
-                                <label for="total" class="font-weight-bolt">Total:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <small class="input-group-text">
-                                            <i class="fas fa-coins"></i>
-                                        </small>
-                                    </div>
-                                    <input type="text" id="totalV" class="form-control" placeholder="TOTAL.." disabled>
-                                    <button class="btn btn-block bg-olive mt-1" type="button" onclick="procesar(2);">Generar Venta <small><i class="fas fa-print"></i></small></button>
-                                </div>
-                            </div>
-                        </div><!--total-col-md-3--->
-                    </div><!--row--->
 
-                    <!-----/tablaa-------->
                 </div>
             </div>
-        </div><!-----cont-fluid-------->
+        </div>
 
-    </section>
+    </section> -->
 
 
     <!-- /.content -->
@@ -206,8 +317,8 @@
 
 
 <div class="modal fade" id="modalImprimiarVenta" tabindex="-1" aria-labelledby="modalVenta" aria-hidden="true">
-    <div class="modal-dialog tbl-modal-producto" >
-        <div class="modal-content" >
+    <div class="modal-dialog tbl-modal-producto">
+        <div class="modal-content">
             <div class="modal-header bg-olive">
                 <h5 class=" text-white  modal-title" id="title_imprimir">Imprimiar Venta</h5>
                 <button type="button" class="text-danger close" data-dismiss="modal" aria-label="Close">
@@ -215,7 +326,7 @@
                 </button>
             </div>
             <div class="modal-body" id="misVentas">
-                
+
             </div><!-----Modal body-------------->
 
         </div>

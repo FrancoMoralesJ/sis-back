@@ -1,4 +1,4 @@
-let tblUsuario, tblClientes, tblCajas, tblCategorias, tblMedidas, tblProductos, tblHistorial, tblHistorialVenta, tblMarcas, tbl_cajaApertura,tblSinStock;
+let tblUsuario, tblClientes, tblCajas, tblCategorias, tblMedidas, tblProductos, tblHistorial, tblHistorialVenta, tblMarcas, tbl_cajaApertura, tblSinStock;
 
 $(document).ready(function () {
 
@@ -8,8 +8,8 @@ $(document).ready(function () {
 document.addEventListener("DOMContentLoaded", function () {
   $("#buscarCliente").select2({ focus: true });
   verificarBtn();
-  tblSinStock=$("#tblSinStock").DataTable();
-  
+  tblSinStock = $("#tblSinStock").DataTable();
+
   tblUsuario = $("#tblUsuarios").DataTable({
     ajax: {
       url: base_url + "/Usuarios/listar",
@@ -1443,7 +1443,7 @@ function registrarProductos(e) {
     http.send(new FormData(frm));
     http.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        
+
         const res = JSON.parse(this.responseText);
 
 
@@ -2774,22 +2774,81 @@ function registrarPermisos(e) {
 }
 
 
-function getCodigo(){
- 
+function getCodigo() {
+
 
   const url = base_url + "Productos/generarCodigo";
+
+  const http = new XMLHttpRequest();
+  http.open("GET", url, true);
+  http.send();
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      const res = JSON.parse(this.responseText);
+      document.getElementById("codigo").value = (res);
+
+    }
+  }
+
+
+
+}
+
+async function buscarProductos(e) {
+  const tipo = e.target.name;
+
  
-       const http = new XMLHttpRequest();
-       http.open("GET", url, true);
-       http.send();
-       http.onreadystatechange = function () {
-         if (this.readyState == 4 && this.status == 200) {
-           const res = JSON.parse(this.responseText);
-           document.getElementById("codigo").value=(res);
-           
-         }
-       }
-       
+  const valor = encodeURIComponent(e.target.value);
+  let url;
+  const tblbuscar = document.getElementById('tblDetalleBuscarVentas');
+ 
+
+  if (tipo === 'Bmarcas') {
+
+    url = `${base_url}Compras/getFiltrarProductos?id=${valor}&tipo=1`;
+
+  } else if (tipo === 'bCategoria') {
+
+    url = `${base_url}Compras/getFiltrarProductos?id=${valor}&tipo=2`;
+
+  } else if (tipo === 'txt_marca') {
+
+    url = `${base_url}Compras/getFiltrarProductos?id=${valor}&tipo=3`;
+
+  }
+  
+  // // if (valor == '') {
+  // //   tblbuscar.innerHTML = '';
+  // //   return;
+  // // }
+
+  try {
+     const res= await fetch(url,{
+      method:'GET'
+     })
+     if(res.ok){
+      const data=await res.json();
+
+      console.log(data['Productos']);
+
+      let html='';
+      data['Productos'].forEach((row)=>{
+        html +=`
+            <tr>
+              <td>${row['codigo']}</td>
+              <td> <img src="${row['foto']}" class="img-thumbnail" style="width:50px" ></td>
+              <td>${row['descripcion']}</td>
+              <td>${row['nombre_marca']}</td>
+              <td>${row['cantidad']}</td>
+              <td>${row['precio_venta']}</td>
+            </tr>
+        `;
+      });
+      
      
- 
- }
+      $("#tblDetalleBuscarVentas").html(html);
+     }
+  } catch (error) {
+    
+  }
+}

@@ -249,6 +249,7 @@ class Productos extends Controller
             else if($tipo==3){
                 $campo='id_marca';
             }
+
             if(empty($id) && empty($tipo)){
                
                 $data['Productos']=[''];
@@ -267,6 +268,8 @@ class Productos extends Controller
             die();
         }
     }
+
+    
     function generarCodigo() {
         // Genera un número aleatorio con la longitud especificada
      $numeroAleatorio = random_int(1000, 9999); // Asegura que sea de 4 dígitos

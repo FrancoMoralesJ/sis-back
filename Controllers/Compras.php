@@ -345,6 +345,9 @@ class Compras extends Controller
             $data['clientes'] = $this->model->getClientes();
             $data['id_User']=$id_usuario;
             $data['roles']=$this->model->verificarPermiso($id_usuario,"Nueva_Venta");
+            $data['categorias'] = $this->model->getCategorias();
+            $data['marcas'] =$this->model->getMarcas();
+
             if($_SESSION['modulo_venta']=='Nueva_Venta'){
             $this->views->gteView($this, "Venta", $data);
              
@@ -707,6 +710,55 @@ public function listar_historialVentas()
         echo json_encode($msg,JSON_UNESCAPED_UNICODE);
         die();
     }
+    
+    public function getFiltrarProductos(){
 
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $id = $_GET['id']; 
+            $tipo = $_GET['tipo']; 
+    
+            $respuesta = [
+                'id' => $id,
+                'tipo' => $tipo,
+                'mensaje' => 'Datos recibidos correctamente'
+            ];
+            $campo="";
+            if($tipo==1){
+                $campo='id_marca';
+            }
+            else if($tipo==2){
+                $campo='id_categoria';
+            }
+            else if($tipo==3){
+                $campo='id_marcas';
+            }
+
+            if(empty($id) && empty($tipo)){
+               
+                $data['Productos']=[''];
+            }else{
+                
+                $data['Productos']=$this->model->filtrarProducto($campo,$id);
+                 for ($i=0; $i < count($data['Productos']); $i++) { 
+                    
+                    if($data['Productos'][$i]['foto']){
+                        $data['Productos'][$i]['foto']=base_url . 'Assets/img/productos/'.$data['Productos'][$i]['foto'];
+                    }
+                 }
+                  
+                
+            }
+            
+
+        // print_r($data);
+        // exit();
+
+
+        
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+    }
+    
     
 }
